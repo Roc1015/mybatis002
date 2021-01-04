@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--核心配置文件-->
+<configuration>
+
+    <!--    日志工厂实现-->
+    <settings>
+        <!--            <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--    起别名-->
+    <!--    第一种方式-->
+    <!--    给实体类起别名，避免过长的路径名-->
+    <typeAliases>
+        <typeAlias type="com.ximi.mybatis.demo.pojo.User" alias="User"></typeAlias>
+        <typeAlias type="com.ximi.mybatis.demo.pojo.Student" alias="Student"></typeAlias>
+        <typeAlias type="com.ximi.mybatis.demo.pojo.Teacher" alias="Teacher"></typeAlias>
+    </typeAliases>
+    <!--    第二种方式-->
+    <!--    <typeAliases>-->
+    <!--        <package name="com.ximi.mybatis.pojo"/>-->
+    <!--    </typeAliases>-->
+    <!--    第三种起别名-->
+    <!--    使用@Alias注解在实体类上-->
+
+    <environments default="development">    <!--默认选择开发环境-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+        <!--可以选择多套环境-->
+        <!--        <environment id="development">-->
+        <!--            <transactionManager type="JDBC"/>-->
+        <!--            <dataSource type="POOLED">-->
+        <!--                <property name="driver" value="${driver}"/>-->
+        <!--                <property name="url" value="${url}"/>-->
+        <!--                <property name="username" value="${username}"/>-->
+        <!--                <property name="password" value="${password}"/>-->
+        <!--            </dataSource>-->
+        <!--        </environment>-->
+    </environments>
+    <!--    mapper注册-->
+    <!--    三种注册方式-->
+    <mappers>
+        <mapper resource="com/ximi/mybatis/demo/dao/UserMapper.xml"></mapper>
+        <mapper resource="com/ximi/mybatis/demo/dao/StudentMapper.xml"></mapper>
+        <mapper resource="com/ximi/mybatis/demo/dao/TeacherMapper.xml"></mapper>
+    </mappers>
+</configuration>

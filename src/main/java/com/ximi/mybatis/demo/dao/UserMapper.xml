@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ximi.mybatis.demo.mapper.UserMapper">
+    <select id="getUserList" resultType="User">
+        select * from user ;
+    </select>
+
+
+    <select id="getUserById" parameterType="int" resultType="User">
+        select * from user where id = #{id};
+    </select>
+    <!--根据userid删除user-->
+    <select id="deleteUserById" parameterType="int" resultType="User">
+        delete from user where id = #{id};
+    </select>
+    <!--增加用户-->
+    <insert id="addUser" parameterType="User">
+        insert into user (id,name,pwd) values (#{id},#{name},#{pwd})
+    </insert>
+    <!--  根据id修改用户信息-->
+    <update id="updateUserById" parameterType="User">
+        update user set name =#{name},pwd=#{pwd} where id = #{id};
+    </update>
+
+    <!--  测试map-->
+    <insert id="addUser2" parameterType="map">
+        insert into user (id,name,pwd) values (#{userid},#{userName},#{password})
+    </insert>
+
+    <!--  结果集映射-->
+
+    <!--  Limit分页-->
+    <select id="getUserListByLimit" parameterType="map" resultType="User">
+        select * from USER limit #{startIndex},#{page} ;
+    </select>
+
+    <!--  rowBounds实现分页-->
+    <select id="getUserListByRowBounds" resultType="User">
+        select * from USER ;
+    </select>
+</mapper>
